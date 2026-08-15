@@ -7,6 +7,27 @@
 
 ## 2026-08-15
 
+### v2.0 —— 项目完结：整理复盘、明确结论、转公开（约 15:30）
+
+**做了什么**
+- 重写 `README.md` 为复盘版，诚实交代三件事：干了什么 / 为什么 Steam 不可行 / 能在哪里实现。
+- 明确项目最终结论：**Steam 好友列表自定义状态是平台硬限制，第三方无法实现**；但「状态采集层」完整可用，可复用到 Discord / QQ。
+- 补充替代方案说明（Discord Rich Presence 推荐、QQ 个性签名）。
+- 仓库由私有转为公开。
+
+**为什么 Steam 最终不可行（技术定论）**
+- `SetRichPresence("steam_display", "自定义文本")` 返回 True 只代表调用成功，不代表 Steam 会显示。
+- `steam_display` 的值必须是开发商（Firaxis）在 Steamworks 后台注册的 localization token（如 `#Status_Playing`），第三方传入普通字符串会被 Steam 丢弃或显示空白。
+- `status` 键只在「查看游戏信息」对话框可见，好友列表主显示不显示。
+- 绕过手段（DLL 注入有 VAC 风险、「非 Steam 游戏」改名是静态的）均不实用。
+- 这是 Steam 阻止第三方刷广告/违规内容的安全设计，不会为 mod 开放。
+
+**替代方案（可复用采集层）**
+- **Discord Rich Presence**：100% 开放，注册应用拿 Client ID 即可，`details`/`state`/大图/计时器全支持，采集层无需改动。
+- **QQ 个性签名**：NapCat / Lagrange 协议框架，`set_qq_profile` 改 `personal_note`；有封号风险，建议小号、降频。
+
+---
+
 ### v1.10 —— 修复 Python 解析 Lua.log 失败（约 13:25）
 
 **现象**
