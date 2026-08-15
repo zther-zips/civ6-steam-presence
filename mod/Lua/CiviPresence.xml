@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context>
+  <LuaContext ID="CiviPresence" FileName="CiviPresence" Hidden="1"/>
+</Context>

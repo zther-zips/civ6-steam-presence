@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="A3F1C0D2-5B4E-4A9C-8D7E-1F2B3C4D5E6F" version="1">
+  <Properties>
+    <Name>LOC_CIVI_PRESENCE_NAME</Name>
+    <Teaser>LOC_CIVI_PRESENCE_TEASER</Teaser>
+    <Description>LOC_CIVI_PRESENCE_DESC</Description>
+    <Authors>baka</Authors>
+    <ShowInBrowser>AlwaysShow</ShowInBrowser>
+    <EnabledByDefault>1</EnabledByDefault>
+    <EnabledAtStartup>1</EnabledAtStartup>
+    <AffectsSavedGames>0</AffectsSavedGames>
+    <CompatibleVersions>1.2,2.0</CompatibleVersions>
+  </Properties>
+  <InGameActions>
+    <AddUserInterfaces id="CiviPresenceUI">
+      <Properties>
+        <Context>InGame</Context>
+      </Properties>
+      <File>Lua/CiviPresence.xml</File>
+    </AddUserInterfaces>
+    <ImportFiles id="CiviPresenceFiles">
+      <File>Lua/CiviPresence.lua</File>
+    </ImportFiles>
+  </InGameActions>
+  <Files>
+    <File>Lua/CiviPresence.lua</File>
+    <File>Lua/CiviPresence.xml</File>
+  </Files>
+  <LocalizedText>
+    <Text id="LOC_CIVI_PRESENCE_NAME">
+      <en_US>CiviPresence - Steam Rich Presence</en_US>
+      <zh_Hans_CN>文明六状态外显（Steam 好友状态）</zh_Hans_CN>
+    </Text>
+    <Text id="LOC_CIVI_PRESENCE_TEASER">
+      <en_US>Expose in-game state for Steam rich presence.</en_US>
+      <zh_Hans_CN>把游戏内状态写到本地文件，供外部工具设置 Steam 好友状态。</zh_Hans_CN>
+    </Text>
+    <Text id="LOC_CIVI_PRESENCE_DESC">
+      <en_US>Collects ruleset, difficulty, turn, era, research, wonder, wars and great people progress into a local file. Requires the companion external tool.</en_US>
+      <zh_Hans_CN>采集规则集、难度、回合、时代、研发、奇观、战争和伟人进度，写入本地文件。需要配合外部工具一起使用。</zh_Hans_CN>
+    </Text>
+  </LocalizedText>
+</Mod>
