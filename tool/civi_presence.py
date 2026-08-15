@@ -249,15 +249,19 @@ def parse_lua_log(path):
     except OSError:
         return data
 
+    # 注意：文明六会在 Lua 的 print 输出前加 "脚本名: " 前缀，
+    # 所以日志行实际是 "CiviPresence: CIVI_PRESENCE_DATA::..."，
+    # 不能 startswith 匹配，要用 find 定位标记。
     target = None
+    marker = "CIVI_PRESENCE_DATA::"
     for line in tail.splitlines():
-        if line.startswith("CIVI_PRESENCE_DATA::"):
-            target = line
+        idx = line.find(marker)
+        if idx != -1:
+            target = line[idx + len(marker):]
     if target is None:
         return data
 
-    payload = target[len("CIVI_PRESENCE_DATA::"):]
-    for kv in payload.split("||"):
+    for kv in target.split("||"):
         if "=" in kv:
             k, _, v = kv.partition("=")
             data[k.strip()] = v.strip()
