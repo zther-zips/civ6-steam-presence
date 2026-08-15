@@ -7,6 +7,24 @@
 
 ## 2026-08-15
 
+### v1.10 —— 修复 Python 解析 Lua.log 失败（约 13:25）
+
+**现象**
+- Lua 端已正常 print 出 `RULESET=风云变幻||DIFFICULTY=王子||...`，但 Python 工具一直只显示兜底「文明六」，无详细状态。
+
+**根因**
+- 文明六会在 Lua 的 print 输出前自动加「脚本名: 」前缀，Lua.log 实际行是 `CiviPresence: CIVI_PRESENCE_DATA::...`。
+- Python 的 `parse_lua_log` 用 `line.startswith("CIVI_PRESENCE_DATA::")` 匹配，带前缀后永远匹配不到 → 返回空 dict → 兜底显示。
+
+**修复**
+- `parse_lua_log` 改用 `line.find("CIVI_PRESENCE_DATA::")` 定位标记，取标记之后的内容解析，兼容任意前缀。
+
+**实测**
+- 解析结果：`RULESET=风云变幻, DIFFICULTY=王子, TURN=6, ERA=远古时代, TECH=采矿业, CIVIC=法典, GP=大将军,0`
+- 显示文本：`文明六 | 风云变幻 | 王子 | (第6回合) · 远古时代 · 研发:采矿业 · 市政:法典 · 伟人:大将军 0`
+
+---
+
 ### v1.6 —— 修复 Lua 脚本从未加载（缺 ImportFiles）+ 全量诊断输出（约 11:40）
 
 **根因（有日志证据）**
